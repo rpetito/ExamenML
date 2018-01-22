@@ -14,12 +14,13 @@ import com.example.rodrigo.examenml.util.ResponseListener;
 import com.example.rodrigo.examenml.view.activity.BaseActivity;
 
 import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by rodrigo on 20/01/18.
  */
 
-public abstract class ServiceFragment<T extends BaseController> extends BaseFragment implements View.OnClickListener {
+public abstract class ServiceFragment<T extends BaseController, M> extends BaseFragment implements View.OnClickListener, ResponseListener<M> {
 
 
     protected abstract void onChildViewCreated(View view, Bundle savedInstanceState);
@@ -71,6 +72,12 @@ public abstract class ServiceFragment<T extends BaseController> extends BaseFrag
     }
 
 
+    @Override
+    public void onSuccess(M item) {
+        hideProgressBar();
+    }
+
+    @Override
     public void onError(ServiceError error) {
         showServiceErrorDialog(error);
     }
