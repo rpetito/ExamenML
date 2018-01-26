@@ -1,9 +1,11 @@
 package com.example.rodrigo.examenml.view.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.rodrigo.examenml.R;
@@ -21,7 +23,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
+//        getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
 
@@ -54,6 +56,27 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
         if(getSupportFragmentManager().getBackStackEntryCount() == 0 ) {
             finish();
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Cuidado")
+                .setMessage("Esta seguro que desea salir del proceso de pago?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
 
