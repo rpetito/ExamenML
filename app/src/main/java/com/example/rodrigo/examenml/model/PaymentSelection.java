@@ -13,6 +13,7 @@ public class PaymentSelection {
     private BigDecimal ammount;
     private PaymentMethod paymentMethod;
     private PaymentMethod bank;
+    private CuotasCosts cuotas;
 
 
     private PaymentSelection() {
@@ -33,8 +34,8 @@ public class PaymentSelection {
         return ammount;
     }
 
-    public void setAmmount(BigDecimal ammount) {
-        this.ammount = ammount;
+    public void setAmmount(String ammount) {
+        this.ammount = new BigDecimal(ammount);
     }
 
 
@@ -53,4 +54,14 @@ public class PaymentSelection {
     public void setBank(PaymentMethod bank) {
         this.bank = bank;
     }
+
+
+    public CuotasCosts getCuotas() {
+        return cuotas;
+    }
+
+    public void setCuotas(CuotasCosts cuotas) {
+        this.cuotas = cuotas;
+    }
 }
+

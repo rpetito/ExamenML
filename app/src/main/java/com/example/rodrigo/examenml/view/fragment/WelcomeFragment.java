@@ -35,7 +35,7 @@ public class WelcomeFragment extends BaseFragment {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeFragmentWithAnimation(new PaymentMethodFragment());
+                changeFragmentWithAnimation(new AmmountFragment());
             }
         });
     }
