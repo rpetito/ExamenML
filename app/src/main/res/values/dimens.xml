@@ -16,10 +16,11 @@
     <dimen name="text_large">24sp</dimen>
     <dimen name="text_xlarge">48sp</dimen>
     <dimen name="card_payment_selection_width">200dp</dimen>
-    <dimen name="card_payment_selection_height">300dp</dimen>
+    <dimen name="card_payment_selection_height">180dp</dimen>
     <dimen name="cardview_radius">10dp</dimen>
     <dimen name="cardview_elevation">5dp</dimen>
-    <dimen name="card_payment_selection_image_width">200dp</dimen>
-    <dimen name="card_payment_selection_image_height">100dp</dimen>
+    <dimen name="card_payment_selection_image_width">150dp</dimen>
+    <dimen name="card_payment_selection_image_height">80dp</dimen>
+    <dimen name="selection_view_pager_height">200dp</dimen>
 
 </resources>

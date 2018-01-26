@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.rodrigo.examenml.R;
 import com.example.rodrigo.examenml.model.PaymentMethod;
+import com.example.rodrigo.examenml.util.SelectedItemListener;
 
 import butterknife.BindView;
 
@@ -21,11 +22,13 @@ public class PaymentMethodItemFragment extends BaseFragment {
     private static final String PAYMENT_METHOD_BUNDLE = "PaymentMethod";
 
     private PaymentMethod paymentMethod;
+    private SelectedItemListener<PaymentMethod> selectedItemListener;
 
     @BindView(R.id.fragment_payment_method_item_image)
     ImageView imageView;
     @BindView(R.id.fragment_payment_method_item_name)
     AppCompatTextView nameTextView;
+
 
     public static PaymentMethodItemFragment newInstance(PaymentMethod paymentMethod) {
         PaymentMethodItemFragment frag = new PaymentMethodItemFragment();
@@ -33,6 +36,11 @@ public class PaymentMethodItemFragment extends BaseFragment {
         bundle.putParcelable(PAYMENT_METHOD_BUNDLE, paymentMethod);
         frag.setArguments(bundle);
         return frag;
+    }
+
+
+    public void setSelectedItemListener(SelectedItemListener<PaymentMethod> selectedItemListener) {
+        this.selectedItemListener = selectedItemListener;
     }
 
 
@@ -52,7 +60,18 @@ public class PaymentMethodItemFragment extends BaseFragment {
             Glide.with(getActivity()).load(paymentMethod.getThumbnail()).fitCenter().into(imageView);
         }
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(selectedItemListener != null) {
+                    selectedItemListener.itemSelected(paymentMethod);
+                }
+            }
+        });
+
     }
+
+
 
 
 }

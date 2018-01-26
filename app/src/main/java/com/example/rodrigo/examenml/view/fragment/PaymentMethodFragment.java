@@ -14,6 +14,8 @@ import com.example.rodrigo.examenml.R;
 import com.example.rodrigo.examenml.adapter.ViewPagerAdapter;
 import com.example.rodrigo.examenml.controller.PaymentController;
 import com.example.rodrigo.examenml.model.PaymentMethod;
+import com.example.rodrigo.examenml.model.PaymentSelection;
+import com.example.rodrigo.examenml.util.SelectedItemListener;
 
 import java.util.List;
 
@@ -23,8 +25,9 @@ import butterknife.BindView;
  * Created by rodrigo on 21/01/18.
  */
 
-public class PaymentMethodFragment extends SelectionFragment<PaymentController, List<PaymentMethod>> {
+public class PaymentMethodFragment extends SelectionFragment<PaymentController, List<PaymentMethod>> implements SelectedItemListener<PaymentMethod> {
 
+    private PaymentMethod paymentMethod;
 
     @Override
     protected void callService() {
@@ -46,10 +49,27 @@ public class PaymentMethodFragment extends SelectionFragment<PaymentController, 
     protected ViewPagerAdapter getViewPagerAdapter(List<PaymentMethod> item) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         for(PaymentMethod pm : item) {
-            adapter.addFragment(PaymentMethodItemFragment.newInstance(pm));
+            PaymentMethodItemFragment frag = PaymentMethodItemFragment.newInstance(pm);
+            frag.setSelectedItemListener(this);
+            adapter.addFragment(frag);
         }
         return adapter;
     }
 
+
+    @Override
+    public void itemSelected(PaymentMethod item) {
+        paymentMethod = item;
+        setSelectedItemText(item.getName());
+    }
+
+
+    @Override
+    protected void nextStep() {
+        if(paymentMethod != null) {
+            PaymentSelection.getInstance().setPaymentMethod(paymentMethod);
+            super.nextStep();
+        }
+    }
 
 }

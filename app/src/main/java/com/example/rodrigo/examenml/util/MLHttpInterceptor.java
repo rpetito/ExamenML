@@ -21,12 +21,30 @@ public class MLHttpInterceptor implements Interceptor {
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();
         request = request.newBuilder()
-                .url(request.url().toString() + "?public_key=" + CoreConfig.getInstance().getApiKey())
+                .url(addPublicKey(request.url().toString()))
                 .build();
         Response response = chain.proceed(request);
         return response;
     }
 
 
+    private String addPublicKey(String url) {
 
+        String finalURL;
+
+        String[] urlSplit = url.split("/");
+        String lastPart = urlSplit[urlSplit.length - 1];
+        if(hasParams(lastPart)) {
+            finalURL = url + "&public_key=" + CoreConfig.getInstance().getApiKey();
+        } else {
+            finalURL = url + "?public_key=" + CoreConfig.getInstance().getApiKey();
+        }
+
+        return finalURL;
+    }
+
+
+    private boolean hasParams(String url) {
+        return url.contains("?");
+    }
 }

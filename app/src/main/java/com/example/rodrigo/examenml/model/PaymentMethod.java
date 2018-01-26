@@ -9,6 +9,7 @@ import android.os.Parcelable;
 
 public class PaymentMethod implements Parcelable {
 
+    private String id;
     private String name;
     private String thumbnail;
 
@@ -28,6 +29,17 @@ public class PaymentMethod implements Parcelable {
         this.thumbnail = thumbnail;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public PaymentMethod() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -35,19 +47,18 @@ public class PaymentMethod implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
         dest.writeString(this.name);
         dest.writeString(this.thumbnail);
     }
 
-    public PaymentMethod() {
-    }
-
     protected PaymentMethod(Parcel in) {
+        this.id = in.readString();
         this.name = in.readString();
         this.thumbnail = in.readString();
     }
 
-    public static final Parcelable.Creator<PaymentMethod> CREATOR = new Parcelable.Creator<PaymentMethod>() {
+    public static final Creator<PaymentMethod> CREATOR = new Creator<PaymentMethod>() {
         @Override
         public PaymentMethod createFromParcel(Parcel source) {
             return new PaymentMethod(source);

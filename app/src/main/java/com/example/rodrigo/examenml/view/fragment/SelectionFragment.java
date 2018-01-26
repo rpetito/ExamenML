@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 import com.example.rodrigo.examenml.R;
 import com.example.rodrigo.examenml.adapter.ViewPagerAdapter;
 import com.example.rodrigo.examenml.controller.BaseController;
+import com.example.rodrigo.examenml.util.SelectedItemListener;
 
 import java.util.List;
 
@@ -24,6 +26,8 @@ public abstract class SelectionFragment<T extends BaseController, M> extends Ser
 
     protected abstract ViewPagerAdapter getViewPagerAdapter(M item);
 
+    @BindView(R.id.fragment_selection_title)
+    AppCompatTextView selectionTitle;
     @BindView(R.id.fragment_selection_screenView)
     View screenView;
     @BindView(R.id.fragment_selection_progressBar)
@@ -32,6 +36,8 @@ public abstract class SelectionFragment<T extends BaseController, M> extends Ser
     ViewPager viewPager;
     @BindView(R.id.fragment_selection_continueButton)
     AppCompatButton continueButton;
+    @BindView(R.id.fragment_selection_selectedItemText)
+    AppCompatTextView selectedItemText;
 
 
     @Override
@@ -44,6 +50,7 @@ public abstract class SelectionFragment<T extends BaseController, M> extends Ser
     protected void onChildViewCreated(View view, Bundle savedInstanceState) {
         setScreenView(screenView);
         setProgressBar(progressBar);
+        viewPager.setPageMargin(36);
     }
 
 
@@ -68,6 +75,18 @@ public abstract class SelectionFragment<T extends BaseController, M> extends Ser
         super.onSuccess(item);
         viewPager.setAdapter(getViewPagerAdapter(item));
     }
+
+
+
+    public void setSelectedItemText(String selectedItemText) {
+        this.selectedItemText.setText("Selección: " + selectedItemText);
+    }
+
+    public void setSelectionTitle(String title) {
+        this.selectionTitle.setText(title);
+    }
+
+
 
 
 }
