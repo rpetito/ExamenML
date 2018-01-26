@@ -37,7 +37,7 @@ public class PaymentDAO extends BaseDAO {
         Call<List<PaymentMethod>> getPaymentMethods();
         @GET("payment_methods/card_issuers")
         Call<List<PaymentMethod>> getBanks(@Query("payment_method_id") String paymentMethod);
-        @GET("payment_methods/payment_methods/installments")
+        @GET("payment_methods/installments")
         Call<List<CuotasPayment>> getCuotas(@Query("amount") String amount,
                                             @Query("payment_method_id") String paymentMethod,
                                             @Query("issuer.id") String bank);

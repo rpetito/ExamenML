@@ -63,5 +63,18 @@ public class PaymentSelection {
     public void setCuotas(CuotasCosts cuotas) {
         this.cuotas = cuotas;
     }
+
+    public boolean hasSelection() {
+        return ammount != null && paymentMethod != null && bank != null && cuotas != null;
+    }
+
+    public void reset() {
+        this.ammount = null;
+        this.paymentMethod = null;
+        this.bank = null;
+        this.cuotas = null;
+    }
+
+
 }
 

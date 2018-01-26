@@ -26,7 +26,6 @@ import butterknife.BindView;
 
 public class CuotasFragment extends ServiceFragment<PaymentController, List<CuotasCosts>> implements RecyclerViewItemClickListener<CuotasCosts> {
 
-    private String selectedCuotas;
 
     @BindView(R.id.fragment_cuotas_recyclerView)
     RecyclerView recyclerView;
